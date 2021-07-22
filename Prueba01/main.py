@@ -3,11 +3,12 @@
 
 # Código de prueba de recoger parámetros
 
-import argparse
 import sys
+import argparse
+import config
 
-username = ""
-password = ""
+# global usuario, clave
+
 if __name__ == '__main__':
 
     print(f"This is the name of the script: ", {sys.argv[0]})
@@ -22,13 +23,11 @@ if __name__ == '__main__':
     # Read arguments from command line
     args = parser.parse_args()
 
-    username = args.user
-    password = args.pw
-
-    print(f"Userid = \'{username}\', password =\'{password}\'")
-
     if args.user:
+        username = args.user
+        password = args.pw
         print(f"Userid1 = \'{username}\', password1 =\'{password}\'")
     else:
-        username = 'default'
-        password = 'default'
+        print(f"Valores de username y password por defecto")
+        username = config.usuario
+        password = config.clave
