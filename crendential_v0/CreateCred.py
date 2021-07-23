@@ -10,7 +10,7 @@ import os
 import sys
 
 
-class Credentials():
+class Credentials:
 
     def __init__(self):
         self.__username = ""
@@ -29,7 +29,7 @@ class Credentials():
 
     @username.setter
     def username(self, username):
-        while (username == ''):
+        while username == '':
             username = input('Enter a proper User name, blank is not accepted:')
         self.__username = username
 
@@ -50,7 +50,7 @@ class Credentials():
 
     @expiry_time.setter
     def expiry_time(self, exp_time):
-        if (exp_time >= 2):
+        if exp_time >= 2:
             self.__time_of_exp = exp_time
 
     def create_cred(self):
@@ -67,7 +67,7 @@ class Credentials():
             file_in.write("++" * 20)
 
         # If there exists an older key file, This will remove it.
-        if (os.path.exists(self.__key_file)):
+        if os.path.exists(self.__key_file):
             os.remove(self.__key_file)
 
         # Open the Key.key file and place the key in it.
@@ -75,14 +75,15 @@ class Credentials():
         try:
 
             os_type = sys.platform
-            if (os_type == 'linux'):
+            if os_type == 'linux':
                 self.__key_file = '.' + self.__key_file
 
             with open(self.__key_file, 'w') as key_in:
                 key_in.write(self.__key.decode())
                 # Hidding the key file.
-                # The below code snippet finds out which current os the scrip is running on and does the taks base on it.
-                if (os_type == 'win32'):
+                # The below code snippet finds out which current os the scrip is running on
+                #     and does the task base on it.
+                if os_type == 'win32':
                     ctypes.windll.kernel32.SetFileAttributesW(self.__key_file, 2)
                 else:
                     pass
